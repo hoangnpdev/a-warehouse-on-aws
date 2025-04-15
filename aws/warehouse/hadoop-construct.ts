@@ -6,13 +6,13 @@ export class HadoopConstruct extends Construct {
         super(scope, id);
         // role
         let emrServiceRole = new aws_iam.Role(this, "EmrServiceRole", {
-            assumedBy: new aws_iam.ServicePrincipal("*") // todo update
+            assumedBy: new aws_iam.ServicePrincipal("elasticmapreduce.amazonaws.com"),
         });
-        // emrServiceRole.addToPolicy(aws_iam.ManagedPolicy.fromAwsManagedPolicyName(".")); // todo update
+        emrServiceRole.addManagedPolicy(aws_iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEMRServicePolicy_v2 "));
         let emrServiceInstanceRole = new aws_iam.Role(this, "EmrServiceInstanceRole", {
-            assumedBy: new aws_iam.ServicePrincipal("*") // todo update
+            assumedBy: new aws_iam.ServicePrincipal("ec2.amazonaws.com")
         });
-        // emrServiceRole.addToPolicy(aws_iam.ManagedPolicy.fromAwsManagedPolicyName(".")); // todo update
+        emrServiceInstanceRole.addManagedPolicy(aws_iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonElasticMapReduceforEC2Role"));
         new aws_emr.CfnCluster(this, id,  {
             serviceRole: "EmrServiceRole",
             jobFlowRole: "EmrServiceInstanceRole",
