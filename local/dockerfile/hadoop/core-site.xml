@@ -3,12 +3,4 @@
         <name>fs.defaultFS</name>
         <value>hdfs://namenode:8020</value>
     </property>
-    <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>/var/lib/hadoop/namenode-data/</value>
-    </property>
-    <property>
-        <name>dfs.datanode.data.dir</name>
-        <value>/var/lib/hadoop/datanode-data/</value>
-    </property>
 </configuration>
