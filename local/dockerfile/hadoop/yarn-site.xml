@@ -1,0 +1,23 @@
+<configuration>
+    <property>
+        <name>yarn.acl.enable</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.admin.acl</name>
+        <value>admin</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>master-node</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>/var/lib/hadoop/yarn-local-dirs/</value>
+    </property>
+</configuration>
