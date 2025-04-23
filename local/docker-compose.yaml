@@ -1,5 +1,9 @@
 name: warehouse
 services:
+  hadoop-client:
+    image: nph/spark-hadoop:latest
+    container_name: hadoop-client
+    command: /bin/bash -c "sleep infinity"
   hadoop-master-node:
     image: nph/spark-hadoop:latest
     container_name: hadoop-master-node

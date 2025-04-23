@@ -1,5 +1,9 @@
 FROM ubuntu:22.04
 
+RUN apt update
+RUN apt install -y python3
+
+
 RUN mkdir -p /usr/local/java
 #RUN wget -P /usr/local/java https://javadl.oracle.com/webapps/download/AutoDL?BundleId=244563_d7fc238d0cbf4b0dac67be84580cfb4b
 COPY jdk8.tar.gz /usr/local/java
