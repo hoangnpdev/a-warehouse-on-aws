@@ -9,7 +9,7 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>master-node</value>
+        <value>hadoop-master-node</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.class</name>

@@ -1,0 +1,7 @@
+GET https://stream.wikimedia.org/v2/stream/recentchange?since=
+Content-Type: application/json
+
+
+###
+
+GET https://www.google.com

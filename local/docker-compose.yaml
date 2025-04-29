@@ -1,9 +1,10 @@
 name: warehouse
 services:
   hadoop-client:
-    image: nph/spark-hadoop:latest
+    image: nph/spark-hadoop-client:latest
     container_name: hadoop-client
-    command: /bin/bash -c "sleep infinity"
+    ports:
+      - 8080:8080
   hadoop-master-node:
     image: nph/spark-hadoop:latest
     container_name: hadoop-master-node
@@ -22,9 +23,10 @@ services:
     environment:
       HDFS_NODE_TYPE: datanode
       YARN_NODE_TYPE: nodemanager
-  hadoop-worker-node-3:
-    image: nph/spark-hadoop:latest
-    container_name: hadoop-worker-node-3
+  postgres:
+    image: postgres:16.8
+    container_name: postgres
+    ports:
+      - 5433:5432
     environment:
-      HDFS_NODE_TYPE: datanode
-      YARN_NODE_TYPE: nodemanager
+      POSTGRES_PASSWORD: 123456
