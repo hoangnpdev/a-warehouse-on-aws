@@ -5,6 +5,7 @@ services:
     container_name: hadoop-client
     ports:
       - 8080:8080
+      - 8082:22
   hadoop-master-node:
     image: nph/spark-hadoop:latest
     container_name: hadoop-master-node

@@ -7,17 +7,11 @@ export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow_user:12
 export AIRFLOW__CORE__EXECUTOR=LocalExecutor
 export AIRFLOW__CORE__PARALLELISM=4
 
-airflow db migrate
-airflow users create \
-    --username admin \
-    --password admin \
-    --firstname admin \
-    --lastname admin \
-    --role Admin \
-    --email admin@admin.admin
 airflow webserver --port 8080 --daemon
 airflow scheduler --daemon
 airflow dag-processor --daemon
 airflow triggerer --daemon
+
+service ssh start
 
 sleep infinity

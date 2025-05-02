@@ -124,5 +124,18 @@
     "server_script_path": "/w",
     "wiki": "srwiki",
     "parsedcomment": "Подножје"
+  },
+  {
+    "$schema": "/mediawiki/recentchange/1.0.1",
+    "meta": {
+      "dt": "2025-05-02T00:02:00.000Z",
+      "stream": "mediawiki.recentchange",
+      "domain": "canary",
+      "id": "745043bd-917a-4d0d-8b3b-9bcd868e36f2",
+      "request_id": "f7c016ec-a193-4527-a883-788c67789d88",
+      "topic": "codfw.mediawiki.recentchange",
+      "partition": 0,
+      "offset": 1576906285
+    }
   }
 ]
