@@ -1,0 +1,1 @@
+nohup python3 test.py > log.out 2>&1 < /dev/null &

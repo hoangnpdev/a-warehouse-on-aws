@@ -1,11 +1,23 @@
 import argparse
 import json
+import os.path
+import shutil
+
 from requests_sse import EventSource
 import datetime
 import csv
 from typing import TypedDict
 
 BATCH_PERIOD = 5  # minutes
+parser = argparse.ArgumentParser()
+parser.add_argument("--datetime",
+                    dest="datetime",
+                    required=True,
+                    help="Please use the datetime format: %Y-%m-%dT%H:%M:%S")
+args = parser.parse_args()
+SINCE = args.datetime
+DATE = datetime.datetime.strptime(SINCE, '%Y-%m-%dT%H:%M:%S').strftime('%Y%m%d')
+DATA_DIR = f'{os.path.dirname(__file__)}/data/{DATE}'
 
 
 class WikiEvent(TypedDict):
@@ -20,16 +32,14 @@ class WikiEvent(TypedDict):
     length: dict | None
 
 
+def prepare_data_dir():
+    shutil.rmtree(DATA_DIR, ignore_errors=True)
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+
 def collect_wiki_recent_change():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--datetime",
-                        dest="datetime",
-                        required=True,
-                        help="Please use the datetime format: %Y-%m-%dT%H:%M:%S")
-    args = parser.parse_args()
-    since = args.datetime
-    start_time = datetime.datetime.strptime(since, '%Y-%m-%dT%H:%M:%S')
-    url = f'https://stream.wikimedia.org/v2/stream/recentchange?since={since}'
+    start_time = datetime.datetime.strptime(SINCE, '%Y-%m-%dT%H:%M:%S')
+    url = f'https://stream.wikimedia.org/v2/stream/recentchange?since={SINCE}'
     print(f'url: {url}')
     with EventSource(url) as stream:
         current_batch = start_time  # timestamp each 5 minutes
@@ -43,6 +53,7 @@ def collect_wiki_recent_change():
                     continue
                 current_time = datetime.datetime.utcfromtimestamp(change['timestamp'])
                 if current_time >= start_time + datetime.timedelta(hours=24, minutes=BATCH_PERIOD):
+                    save_batch(data, f'{current_batch.isoformat()}.csv')
                     break
                 if current_time >= current_batch + datetime.timedelta(minutes=BATCH_PERIOD):
                     print(f'batch size: {len(data)}, current: {current_time.isoformat()}')
@@ -63,10 +74,11 @@ def extract_change(change: WikiEvent):
             change['type'], edit_size]
 
 
-def save_batch(data, path):
-    with open(path, 'w', newline='') as file:
+def save_batch(data, file_name):
+    with open(f'{DATA_DIR}/{file_name}', 'w', newline='') as file:
         csv_writer = csv.writer(file, delimiter=',')
         csv_writer.writerows(data)
 
 
+prepare_data_dir()
 collect_wiki_recent_change()

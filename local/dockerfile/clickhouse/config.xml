@@ -1,0 +1,74 @@
+<clickhouse>
+    <listen_host>0.0.0.0</listen_host>
+<!--    <keeper_server>-->
+<!--        <tcp_port>9181</tcp_port>-->
+<!--        <server_id from_env="CLICKHOUSE_SERVER_ID"/>-->
+<!--        <log_storage_path>/var/lib/clickhouse/coordination/log</log_storage_path>-->
+<!--        <snapshot_storage_path>/var/lib/clickhouse/coordination/snapshots</snapshot_storage_path>-->
+<!--        <coordination_settings>-->
+<!--            <operation_timeout_ms>10000</operation_timeout_ms>-->
+<!--            <session_timeout_ms>30000</session_timeout_ms>-->
+<!--            <raft_logs_level>trace</raft_logs_level>-->
+<!--        </coordination_settings>-->
+<!--        <raft_configuration>-->
+<!--            <server>-->
+<!--                <id>1</id>-->
+<!--                <hostname>clickhouse01</hostname>-->
+<!--                <port>9234</port>-->
+<!--            </server>-->
+<!--            <server>-->
+<!--                <id>2</id>-->
+<!--                <hostname>clickhouse02</hostname>-->
+<!--                <port>9234</port>-->
+<!--            </server>-->
+<!--            <server>-->
+<!--                <id>3</id>-->
+<!--                <hostname>clickhouse03</hostname>-->
+<!--                <port>9234</port>-->
+<!--            </server>-->
+<!--        </raft_configuration>-->
+<!--    </keeper_server>-->
+<!--    -->
+<!--    <zookeeper>-->
+<!--        <node>-->
+<!--            <host>clickhouse01</host>-->
+<!--            <port>9181</port>-->
+<!--        </node>-->
+<!--        <node>-->
+<!--            <host>clickhouse02</host>-->
+<!--            <port>9181</port>-->
+<!--        </node>-->
+<!--        <node>-->
+<!--            <host>clickhouse03</host>-->
+<!--            <port>9181</port>-->
+<!--        </node>-->
+<!--    </zookeeper>-->
+
+<!--    define cluster-->
+
+<!--    <remote_servers>-->
+<!--        <logs>-->
+<!--            <shard>-->
+<!--                <internal_replication>true</internal_replication>-->
+<!--                <replica>-->
+<!--                    <host>clickhouse01</host>-->
+<!--                    <port>9000</port>-->
+<!--                </replica>-->
+<!--            </shard>-->
+<!--            <shard>-->
+<!--                <internal_replication>true</internal_replication>-->
+<!--                <replica>-->
+<!--                    <host>clickhouse02</host>-->
+<!--                    <port>9000</port>-->
+<!--                </replica>>-->
+<!--            </shard>-->
+<!--            <shard>-->
+<!--                <internal_replication>true</internal_replication>-->
+<!--                <replica>-->
+<!--                    <host>clickhouse03</host>-->
+<!--                    <port>9000</port>-->
+<!--                </replica>>-->
+<!--            </shard>-->
+<!--        </logs>-->
+<!--    </remote_servers>-->
+</clickhouse>

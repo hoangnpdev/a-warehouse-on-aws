@@ -6,24 +6,28 @@ services:
     ports:
       - 8080:8080
       - 8082:22
+    init: true
   hadoop-master-node:
     image: nph/spark-hadoop:latest
     container_name: hadoop-master-node
     environment:
       HDFS_NODE_TYPE: namenode
       YARN_NODE_TYPE: resourcemanager
+    init: true
   hadoop-worker-node-1:
     image: nph/spark-hadoop:latest
     container_name: hadoop-worker-node-1
     environment:
       HDFS_NODE_TYPE: datanode
       YARN_NODE_TYPE: nodemanager
+    init: true
   hadoop-worker-node-2:
     image: nph/spark-hadoop:latest
     container_name: hadoop-worker-node-2
     environment:
       HDFS_NODE_TYPE: datanode
       YARN_NODE_TYPE: nodemanager
+    init: true
   postgres:
     image: postgres:16.8
     container_name: postgres
@@ -31,3 +35,10 @@ services:
       - 5433:5432
     environment:
       POSTGRES_PASSWORD: 123456
+  clickhouse:
+    image: warehouse/clickhouse:25.0
+    container_name: clickhouse
+    ports:
+      - 8123:8123
+    environment:
+      - CLICKHOUSE_SERVER_ID=1

@@ -17,7 +17,7 @@ RUN airflow users create \
     --email admin@admin.admin
 
 RUN apt update && apt install -y openssh-server
-RUN apt install python3.10-vevn
+RUN apt -y install python3.10-venv
 
 COPY start-hadoop-client.sh /usr/local/
 CMD ["/bin/bash", "/usr/local/start-hadoop-client.sh"]
